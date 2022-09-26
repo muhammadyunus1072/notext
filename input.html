@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTExt</title>
+</head>
+<body>
+    <!-- The `multiple` attribute lets users select multiple files. -->
+    <input type="file" id="inputfile" multiple>
+    <h3>File Content:</h3>
+    <pre id="output"></pre>
+    <script>
+        let key = 100;
+        let arg = [];
+        while (key > 0) {
+            // console.log(Math.random())
+            let x = Math.floor((Math.random() * 10) + 1);
+            if( key - x >= 0 && x != 10){
+                // console.log(key+" - "+x)
+                key -= x;
+                arg.push(x)
+            }
+        }
+        let x = arg.join("");
+        document.getElementById("output").textContent = x;
+        document.getElementById('inputfile').addEventListener('change', function() {
+            var fr=new FileReader();
+            fr.onload=function(){
+                console.log(fr)
+                document.getElementById('output').textContent=fr.result;
+            }
+            fr.readAsText(this.files[0]);
+        })
+    </script>
+</body>
+</html>
